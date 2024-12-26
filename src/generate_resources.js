@@ -197,6 +197,7 @@ export const generateTileFile = async (
 
       // Iterate over tiles within the range
       for (let x = minX; x <= maxX; x++) {
+        fs.mkdirSync(`${outputDir}/tiles/${zoom}/${x}`, { recursive: true });
         for (let y = minY; y <= maxY; y++) {
           try {
             // Render the tile
@@ -210,6 +211,9 @@ export const generateTileFile = async (
               x,
               y,
             );
+            const imageFilename = `tiles/${zoom}/${x}/${y}.png`;
+            const outputPath = path.join(outputDir, imageFilename);
+            fs.writeFileSync(outputPath, tileBuffer);
 
             // Write the tile to the MBTiles file
             mbtiles.putTile(zoom, x, y, tileBuffer, (err) => {
