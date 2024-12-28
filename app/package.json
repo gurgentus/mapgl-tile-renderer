@@ -1,0 +1,64 @@
+{
+  "name": "mapgl-tile-renderer",
+  "version": "1.2.0",
+  "description": "A headless tile renderer for Maplibre GL JS",
+  "type": "module",
+  "main": "./index.js",
+  "scripts": {
+    "format": "prettier --write ./ --ignore-path .prettierignore",
+    "lint:prettier": "prettier ./ --check --ignore-path .prettierignore",
+    "lint:eslint": "eslint . --cache",
+    "lint": "npm run lint:prettier && npm run lint:eslint",
+    "prepare": "[ -f ./node_modules/.bin/husky ] && husky install || echo 'Skipping husky install'",
+    "test": "jest --coverage"
+  },
+  "bin": {
+    "mapgl-tile-renderer": "src/cli.js"
+  },
+  "dependencies": {
+    "@azure/storage-queue": "^12.16.0",
+    "@mapbox/mbtiles": "^0.12.1",
+    "@maplibre/maplibre-gl-native": "^5.3.1",
+    "axios": "^1.6.5",
+    "commander": "^11.1.0",
+    "fs": "^0.0.1-security",
+    "ora": "^8.1.1",
+    "osmtogeojson": "^3.0.0-beta.5",
+    "p-limit": "^5.0.0",
+    "path": "^0.12.7",
+    "pg": "^8.11.5",
+    "pmtiles": "3.0.3",
+    "sharp": "^0.33.2",
+    "styled-map-package": "git+https://github.com/digidem/styled-map-package.git"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "babel-jest": "^29.7.0",
+    "dotenv": "^16.4.1",
+    "dotenv-flow": "^4.1.0",
+    "eslint": "^9.14.0",
+    "globals": "^15.12.0",
+    "husky": "^8.0.3",
+    "jest": "^29.7.0",
+    "lint-staged": "^15.2.0",
+    "pixelmatch": "^5.3.0",
+    "prettier": "^3.2.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css}": [
+      "prettier --write ./src"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/conservationmetrics/mapgl-tile-renderer.git"
+  },
+  "author": "Conservation Metrics",
+  "license": "MIT"
+}
